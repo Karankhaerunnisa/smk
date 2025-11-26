@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Enums\Enums\Gender;
+use App\Enums\Enums\RegistrantStatus;
+use App\Enums\Enums\Religion;
 use App\Models\Major;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -30,9 +33,9 @@ class RegistrantFactory extends Factory
             'nik' => $this->faker->unique()->numerify('################'),
             'birth_place' => $this->faker->city(),
             'birth_date' => $this->faker->date('Y-m-d', '-15 years'), // Approx high school age
-            'gender' => $this->faker->randomElement(['male', 'female']),
-            'religion' => $this->faker->randomElement(['islam', 'christianity', 'catholicism', 'hinduism', 'buddhism', 'confucianism']),
-            'status' => $this->faker->randomElement(['pending', 'verified', 'accepted', 'rejected']),
+            'gender' => $this->faker->randomElement(Gender::cases()),
+            'religion' => $this->faker->randomElement(Religion::cases()),
+            'status' => $this->faker->randomElement(RegistrantStatus::cases()),
         ];
     }
 }

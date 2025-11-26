@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Enums\Enums\Gender;
+use App\Enums\Enums\RegistrantStatus;
+use App\Enums\Enums\Religion;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,6 +18,16 @@ class Registrant extends Model
 
     protected $guarded = ['id'];
 
+    protected function casts(): array
+    {
+        return [
+            'birth_date' => 'date',
+            'gender' => Gender::class,
+            'religion' => Religion::class,
+            'status' => RegistrantStatus::class,
+        ];
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
@@ -24,7 +37,7 @@ class Registrant extends Model
     {
         return $this->belongsTo(Major::class, 'major_id');
     }
-    
+
     public function address(): HasOne
     {
         return $this->hasOne(RegistrantAddress::class, 'registrant_id');
