@@ -18,4 +18,14 @@ enum RegistrantStatus: string
             self::REJECTED => 'Ditolak',
         };
     }
+
+    public function color(): string
+    {
+        return match($this) {
+            self::PENDING => 'yellow',
+            self::VERIFIED => 'blue',
+            self::ACCEPTED => 'green',
+            self::REJECTED => 'red',
+        };
+    }
 }
