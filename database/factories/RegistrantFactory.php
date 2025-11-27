@@ -2,11 +2,10 @@
 
 namespace Database\Factories;
 
-use App\Enums\Enums\Gender;
-use App\Enums\Enums\RegistrantStatus;
-use App\Enums\Enums\Religion;
+use App\Enums\Gender;
+use App\Enums\RegistrantStatus;
+use App\Enums\Religion;
 use App\Models\Major;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -22,9 +21,6 @@ class RegistrantFactory extends Factory
     public function definition(): array
     {
         return [
-            // Automatically create a user for this registrant if one isn't passed
-            'user_id' => User::factory()->state(['role' => 'student']),
-
             // Pick a random existing Major
             'major_id' => Major::inRandomOrder()->first()->id ?? Major::factory(),
 

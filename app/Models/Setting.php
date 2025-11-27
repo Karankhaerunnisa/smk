@@ -9,4 +9,20 @@ class Setting extends Model
 {
     /** @use HasFactory<\Database\Factories\SettingFactory> */
     use HasFactory;
+
+    protected $guarded = ['id'];
+
+    public function getValue(string $key, $default = null) {
+        $setting = self::where('key', $key)->first();
+
+        if ($setting) {
+            return match($setting->type) {
+                'boolean' => (bool) $setting->value,
+                'integer' => (int) $setting->value,
+                default => $setting->value
+            };
+        }
+
+        return $default;
+    }
 }

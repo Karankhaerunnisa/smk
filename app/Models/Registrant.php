@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\Enums\Enums\Gender;
-use App\Enums\Enums\RegistrantStatus;
-use App\Enums\Enums\Religion;
+use App\Enums\Gender;
+use App\Enums\RegistrantStatus;
+use App\Enums\Religion;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -26,11 +26,6 @@ class Registrant extends Model
             'religion' => Religion::class,
             'status' => RegistrantStatus::class,
         ];
-    }
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function major(): BelongsTo

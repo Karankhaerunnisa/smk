@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\Enums\Enums\IncomeRange;
+use App\Enums\GuardianRelationship;
+use App\Enums\IncomeRange;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Factories\Relationship;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -18,7 +18,7 @@ class RegistrantGuardian extends Model
     protected function casts(): array
     {
         return [
-            'relationship' => Relationship::class,
+            'relationship' => GuardianRelationship::class,
             'income_range' => IncomeRange::class,
         ];
     }

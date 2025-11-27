@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('registrants', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('major_id')->constrained('majors');
 
+            $table->string('name');
+            $table->string('email')->unique();
             $table->string('registration_number', 20)->unique();
 
             $table->string('nisn', 10)->unique();
@@ -28,7 +29,7 @@ return new class extends Migration
 
             $table->enum('status', ['pending', 'verified', 'accepted', 'rejected'])->default('pending');
             $table->text('admin_note')->nullable();
-            
+
             $table->timestamps();
         });
     }
