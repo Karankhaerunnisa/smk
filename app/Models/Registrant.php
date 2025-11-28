@@ -28,6 +28,11 @@ class Registrant extends Model
         ];
     }
 
+    public function getRouteKeyName(): string
+    {
+        return 'registration_number';
+    }
+
     public function major(): BelongsTo
     {
         return $this->belongsTo(Major::class, 'major_id');

@@ -20,6 +20,11 @@ class Major extends Model
         ];
     }
 
+    public function getRouteKeyName(): string
+    {
+        return 'code';
+    }
+
     public function registrants(): HasMany
     {
         return $this->hasMany(Registrant::class, 'major_id');
