@@ -77,7 +77,7 @@ class RegistrantController extends Controller
     {
         $registrant->update($request->validated());
 
-        return back()->with('message', 'Status pendaftar berhasil diperbarui.');
+        return back()->with('success', 'Status pendaftar berhasil diperbarui.');
     }
 
     /**

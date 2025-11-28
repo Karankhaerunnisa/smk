@@ -11,7 +11,7 @@ class UpdateMajorRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class UpdateMajorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'code' => ['required', 'string', 'max:10', 'unique:majors,code,code'],
+            'name' => ['required', 'string', 'max:100'],
+            'quota' => ['required', 'integer', 'min:0'],
+            'description' => ['nullable', 'string'],
         ];
     }
 }

@@ -13,15 +13,9 @@ class MajorController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $majors = Major::withCount('registrants')->latest()->get();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return view('admin.majors.index', compact('majors'));
     }
 
     /**
@@ -29,7 +23,9 @@ class MajorController extends Controller
      */
     public function store(StoreMajorRequest $request)
     {
-        //
+        Major::create($request->validated());
+
+        return back()->with('success', 'Jurusan berhasil ditambahkan.');
     }
 
     /**
@@ -41,19 +37,13 @@ class MajorController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Major $major)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(UpdateMajorRequest $request, Major $major)
     {
-        //
+        $major->update($request->validated());
+
+        return back()->with('success', 'Jurusan berhasil diperbarui.');
     }
 
     /**
@@ -61,6 +51,12 @@ class MajorController extends Controller
      */
     public function destroy(Major $major)
     {
-        //
+        if ($major->registrants->count() > 0) {
+            return back()->with('error', 'Gagal Menghapus! Masih ada siswa yang mendaftar di jurusan ini.');
+        }
+
+        $major->delete();
+
+        return back()->with('success', 'Jurusan berhasil dihapus.');
     }
 }
