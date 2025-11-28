@@ -13,7 +13,9 @@ class AnnouncementController extends Controller
      */
     public function index()
     {
-        //
+        $announcements = Announcement::latest()->paginate(10);
+
+        return view('admin.announcements.index', compact('announcements'));
     }
 
     /**
@@ -29,7 +31,9 @@ class AnnouncementController extends Controller
      */
     public function store(StoreAnnouncementRequest $request)
     {
-        //
+        Announcement::create($request->validated());
+
+        return back()->with('success', 'Pengumuman berhasil dibuat.');
     }
 
     /**
@@ -53,7 +57,9 @@ class AnnouncementController extends Controller
      */
     public function update(UpdateAnnouncementRequest $request, Announcement $announcement)
     {
-        //
+        $announcement->update($request->validated());
+
+        return back()->with('success', 'Pengumuman berhasil diperbarui.');
     }
 
     /**
@@ -61,6 +67,8 @@ class AnnouncementController extends Controller
      */
     public function destroy(Announcement $announcement)
     {
-        //
+        $announcement->delete();
+
+        return back()->with('success', 'Pengumuman berhasil dihapus.');
     }
 }

@@ -11,7 +11,14 @@ class StoreAnnouncementRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'is_active' => $this->has('is_active')
+        ]);
     }
 
     /**
@@ -22,7 +29,11 @@ class StoreAnnouncementRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => ['required', 'string', 'max:200'],
+            'content' => ['required', 'string'],
+            'published_at' => ['nullable', 'date'],
+            'expired_at' => ['nullable', 'date', 'after_or_equal:published_at'],
+            'is_active' => ['boolean'],
         ];
     }
 }

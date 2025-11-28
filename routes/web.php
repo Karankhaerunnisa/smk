@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\MajorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegistrantController;
@@ -30,6 +31,8 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::get('/registrants/{registrant}/print', [RegistrantController::class, 'print'])->name('registrants.print');
 
     Route::Resource('/majors', MajorController::class)->except(['create', 'edit', 'show']);
+
+    Route::Resource('/announcements', AnnouncementController::class)->except(['create', 'edit', 'show']);
 });
 
 require __DIR__.'/auth.php';

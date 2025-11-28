@@ -57,8 +57,8 @@
                     </li>
 
                     <li>
-                        <a href="#"
-                            class="flex items-center px-4 py-3 text-gray-400 hover:bg-gray-800 hover:text-white">
+                        <a href="{{ route('admin.announcements.index') }}"
+                            class="flex items-center px-4 py-3 {{ request()->routeIs('admin.announcements.*') }} text-gray-400 hover:bg-gray-800 hover:text-white">
                             <x-heroicon-o-megaphone class="w-5 h-5 mr-3" />
                             Pengumuman
                         </a>
