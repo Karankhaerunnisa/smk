@@ -43,4 +43,7 @@ Route::get('/registration/success/{number}', [FrontRegistrationController::class
 Route::get('/registration/print/{number}', [FrontRegistrationController::class, 'print'])
     ->name('registration.print');
 
+Route::get('/check-status', [FrontRegistrationController::class, 'checkStatusForm'])->name('registration.check-status.form');
+Route::post('/check-status', [FrontRegistrationController::class, 'checkStatus'])->name('registration.check-status');
+
 require __DIR__ . '/auth.php';

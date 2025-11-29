@@ -23,9 +23,18 @@
                             }}</div>
                     </div>
                 </div>
-                <div class="flex items-center">
-                    <a href="{{ route('login') }}" class="text-sm font-medium text-gray-600 hover:text-blue-600">Admin
-                        Login</a>
+                <div class="flex items-center space-x-4">
+                    <a href="{{ route('registration.check-status.form') }}"
+                        class="text-sm font-medium text-gray-600 hover:text-blue-600 flex items-center">
+                        <x-heroicon-o-magnifying-glass class="w-4 h-4 mr-1" />
+                        Cek Status
+                    </a>
+
+                    <a href="{{ route('login') }}"
+                        class="text-sm font-medium text-gray-600 hover:text-blue-600 flex items-center">
+                        <x-heroicon-o-lock-closed class="w-4 h-4 mr-1" />
+                        Admin
+                    </a>
                 </div>
             </div>
         </div>

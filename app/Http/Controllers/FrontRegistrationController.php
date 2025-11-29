@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\GuardianRelationship;
 use App\Enums\RegistrantStatus;
+use App\Http\Requests\CheckStatusRequest;
 use App\Http\Requests\StoreFrontRegistrationRequest;
 use App\Models\Registrant;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -112,5 +113,24 @@ class FrontRegistrationController extends Controller
         $pdf = Pdf::loadView('admin.registrants.print', compact('registrant'));
 
         return $pdf->stream('Bukti-Pendaftaran-' . $registrant->registration_number . '.pdf');
+    }
+
+    public function checkStatusForm()
+    {
+        return view('check-status');
+    }
+
+    public function checkStatus(CheckStatusRequest $request)
+    {
+        $registrant = Registrant::where('registration_number', $request->validated('registration_number'))
+        ->where('birth_date', $request->validated('birth_date'))
+        ->with('major')
+        ->first();
+
+        if (! $registrant) {
+            return back()->with('error', 'Data pendaftar tidak ditemukan. Silakan periksa kembali nomor pendaftaran dan tanggal lahir Anda.')->withInput();
+        } else {
+            return view('check-status', compact('registrant'));
+        }
     }
 }

@@ -140,7 +140,7 @@
 </head>
 
 <body>
-    @if($kop = \App\Models\Setting::getValue('kop_surat'))
+    @if($kop = \App\Models\Setting::getValue('document_header'))
     <img src="{{ public_path('images/' . $kop) }}" class="kop-image" alt="Kop Surat">
     @else
     <table class="header-table">
@@ -151,7 +151,7 @@
             </td>
             <td class="text-cell header">
                 <h1>{{ \App\Models\Setting::getValue('school_name', 'SMK DEFAULT') }}</h1>
-                <h2>PANITIA PENERIMAAN PESERTA DIDIK BARU (PPDB)</h2>
+                <h2>PANITIA SISTEM PENERIMAAN MURID BARU (SPMB)</h2>
                 <p>{{ \App\Models\Setting::getValue('school_address') }}</p>
                 <p>Telp: {{ \App\Models\Setting::getValue('school_phone') }} | Email: {{
                     \App\Models\Setting::getValue('school_email') }}</p>
