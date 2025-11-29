@@ -7,10 +7,10 @@ use App\Http\Controllers\MajorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegistrantController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FrontRegistrationController;
+use App\Http\Controllers\HomeController;
 
-Route::get('/', function () {
-    return redirect()->route('admin.dashboard');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -32,5 +32,15 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::put('/settings', [SettingController::class, 'update'])->name('settings.update');
 });
+
+// Form Submission
+Route::post('/register-student', [FrontRegistrationController::class, 'store'])->name('registration.store');
+
+// Success Page
+Route::get('/registration/success/{number}', [FrontRegistrationController::class, 'success'])->name('registration.success');
+
+// Public Print Route
+Route::get('/registration/print/{number}', [FrontRegistrationController::class, 'print'])
+    ->name('registration.print');
 
 require __DIR__ . '/auth.php';
