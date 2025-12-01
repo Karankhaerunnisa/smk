@@ -65,61 +65,63 @@
     @endif
 
     <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
-        <table class="w-full text-left border-collapse">
-            <thead class="bg-gray-50 text-gray-600">
-                <tr>
-                    <th class="p-4 text-xs font-semibold uppercase tracking-wider w-16">Kode</th>
-                    <th class="p-4 text-xs font-semibold uppercase tracking-wider">Nama Jurusan</th>
-                    <th class="p-4 text-xs font-semibold uppercase tracking-wider">Kuota / Terisi</th>
-                    <th class="p-4 text-xs font-semibold uppercase tracking-wider w-32 text-center">Aksi</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-100">
-                @forelse($majors as $major)
-                <tr class="hover:bg-gray-50 transition-colors">
-                    <td class="p-4">
-                        <span class="font-mono text-sm font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded">
-                            {{ $major->code }}
-                        </span>
-                    </td>
-                    <td class="p-4">
-                        <div class="font-bold text-gray-800">{{ $major->name }}</div>
-                        <div class="text-xs text-gray-500 truncate max-w-xs">{{ $major->description }}</div>
-                    </td>
-                    <td class="p-4">
-                        <div class="flex items-center">
-                            <div class="w-24 bg-gray-200 rounded-full h-2.5 mr-2">
-                                @php $percent = $major->quota > 0 ? ($major->registrants_count / $major->quota) * 100 : 0; @endphp
-                                <div class="bg-blue-600 h-2.5 rounded-full" style="width: {{ min($percent, 100) }}%"></div>
-                            </div>
-                            <span class="text-sm font-medium text-gray-700">
-                                {{ $major->registrants_count }} / {{ $major->quota }}
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead class="bg-gray-50 text-gray-600">
+                    <tr>
+                        <th class="p-4 text-xs font-semibold uppercase tracking-wider w-16">Kode</th>
+                        <th class="p-4 text-xs font-semibold uppercase tracking-wider">Nama Jurusan</th>
+                        <th class="p-4 text-xs font-semibold uppercase tracking-wider">Terisi / Kuota</th>
+                        <th class="p-4 text-xs font-semibold uppercase tracking-wider w-32 text-center">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                    @forelse($majors as $major)
+                    <tr class="hover:bg-gray-50 transition-colors">
+                        <td class="p-4">
+                            <span class="font-mono text-sm font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded">
+                                {{ $major->code }}
                             </span>
-                        </div>
-                    </td>
-                    <td class="p-4 flex justify-center gap-2">
-                        <button @click="openEdit({{ $major }})"
-                                class="p-2 bg-yellow-50 text-yellow-600 rounded-full hover:bg-yellow-100 transition">
-                            <x-heroicon-o-pencil-square class="w-4 h-4" />
-                        </button>
-
-                        <form action="{{ route('admin.majors.destroy', $major->code) }}" method="POST"
-                              onsubmit="return confirm('Hapus jurusan {{ $major->code }}?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="p-2 bg-red-50 text-red-600 rounded-full hover:bg-red-100 transition">
-                                <x-heroicon-o-trash class="w-4 h-4" />
+                        </td>
+                        <td class="p-4">
+                            <div class="font-bold text-gray-800">{{ $major->name }}</div>
+                            <div class="text-xs text-gray-500 truncate max-w-xs">{{ $major->description }}</div>
+                        </td>
+                        <td class="p-4">
+                            <div class="flex items-center">
+                                <div class="w-24 bg-gray-200 rounded-full h-2.5 mr-2">
+                                    @php $percent = $major->quota > 0 ? ($major->registrants_count / $major->quota) * 100 : 0; @endphp
+                                    <div class="bg-blue-600 h-2.5 rounded-full" style="width: {{ min($percent, 100) }}%"></div>
+                                </div>
+                                <span class="text-sm font-medium text-gray-700">
+                                    {{ $major->registrants_count }} / {{ $major->quota }}
+                                </span>
+                            </div>
+                        </td>
+                        <td class="p-4 flex justify-center gap-2">
+                            <button @click="openEdit({{ $major }})"
+                                    class="p-2 bg-yellow-50 text-yellow-600 rounded-full hover:bg-yellow-100 transition">
+                                <x-heroicon-o-pencil-square class="w-4 h-4" />
                             </button>
-                        </form>
-                    </td>
-                </tr>
-                @empty
-                <tr>
-                    <td colspan="4" class="p-8 text-center text-gray-500">Belum ada jurusan.</td>
-                </tr>
-                @endforelse
-            </tbody>
-        </table>
+
+                            <form action="{{ route('admin.majors.destroy', $major->code) }}" method="POST"
+                                  onsubmit="return confirm('Hapus jurusan {{ $major->code }}?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="p-2 bg-red-50 text-red-600 rounded-full hover:bg-red-100 transition">
+                                    <x-heroicon-o-trash class="w-4 h-4" />
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="4" class="p-8 text-center text-gray-500">Belum ada jurusan.</td>
+                    </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <div x-show="modalOpen" class="fixed inset-0 z-50 overflow-y-auto" style="display: none;">

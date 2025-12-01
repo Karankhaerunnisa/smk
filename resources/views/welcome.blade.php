@@ -10,32 +10,71 @@
 
 <body class="bg-gray-50 text-gray-800 font-sans antialiased">
 
-    <nav class="bg-white shadow-sm sticky top-0 z-50">
+    <nav x-data="{ open: false }" class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
+
                 <div class="flex items-center gap-3">
                     <img src="{{ asset('images/' . \App\Models\Setting::getValue('app_logo', 'default.png')) }}"
                         class="h-10 w-auto" alt="Logo">
                     <div>
-                        <div class="font-bold text-blue-900 leading-tight">{{
-                            \App\Models\Setting::getValue('school_name') }}</div>
-                        <div class="text-xs text-gray-500">SPMB Online {{ \App\Models\Setting::getValue('academic_year')
-                            }}</div>
+                        <div class="font-bold text-blue-900 leading-tight">
+                            {{ \App\Models\Setting::getValue('school_name') }}
+                        </div>
+                        <div class="text-xs text-gray-500">
+                            SPMB Online {{ \App\Models\Setting::getValue('academic_year') }}
+                        </div>
                     </div>
                 </div>
-                <div class="flex items-center space-x-4">
+
+                <div class="hidden md:flex items-center space-x-4">
                     <a href="{{ route('registration.check-status.form') }}"
-                        class="text-sm font-medium text-gray-600 hover:text-blue-600 flex items-center">
+                        class="text-sm font-medium text-gray-600 hover:text-blue-600 flex items-center transition">
                         <x-heroicon-o-magnifying-glass class="w-4 h-4 mr-1" />
                         Cek Status
                     </a>
 
                     <a href="{{ route('login') }}"
-                        class="text-sm font-medium text-gray-600 hover:text-blue-600 flex items-center">
+                        class="text-sm font-medium text-gray-600 hover:text-blue-600 flex items-center transition">
                         <x-heroicon-o-lock-closed class="w-4 h-4 mr-1" />
                         Admin
                     </a>
                 </div>
+
+                <div class="-mr-2 flex items-center md:hidden">
+                    <button @click="open = !open"
+                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
+
+                        <x-heroicon-o-bars-3 class="h-6 w-6" x-show="!open" />
+
+                        <x-heroicon-o-x-mark class="h-6 w-6" x-show="open" style="display: none;" />
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div x-show="open" x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
+            x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
+            x-transition:leave-end="opacity-0 -translate-y-2" class="md:hidden border-t border-gray-100 bg-white"
+            style="display: none;">
+
+            <div class="pt-2 pb-3 space-y-1 px-4">
+                <a href="{{ route('registration.check-status.form') }}"
+                    class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50 transition">
+                    <div class="flex items-center">
+                        <x-heroicon-o-magnifying-glass class="w-5 h-5 mr-2" />
+                        Cek Status
+                    </div>
+                </a>
+
+                <a href="{{ route('login') }}"
+                    class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50 transition">
+                    <div class="flex items-center">
+                        <x-heroicon-o-lock-closed class="w-5 h-5 mr-2" />
+                        Admin Login
+                    </div>
+                </a>
             </div>
         </div>
     </nav>
@@ -89,7 +128,8 @@
                     {{ $news->content }}
                 </p>
                 <div class="mt-auto pt-2">
-                    <a href="{{ route('announcement.show', $news->id) }}" class="text-sm font-semibold text-blue-600 hover:text-blue-800 inline-flex items-center transition">
+                    <a href="{{ route('announcement.show', $news->id) }}"
+                        class="text-sm font-semibold text-blue-600 hover:text-blue-800 inline-flex items-center transition">
                         Baca Selengkapnya
                         <x-heroicon-o-arrow-long-right class="w-4 h-4 ml-1" />
                     </a>
@@ -368,7 +408,7 @@
                             <input type="number" name="nilai_ipa" x-model="ipa" step="0.01"
                                 class="w-full text-sm rounded border-gray-300">
                         </div>
-                        <div class="text-center">
+                        <div class="text-center col-span-2 md:col-span-1">
                             <div class="text-xs text-gray-500 mb-1">Rata-Rata</div>
                             <div class="font-bold text-xl text-blue-600" x-text="average">0.00</div>
                         </div>

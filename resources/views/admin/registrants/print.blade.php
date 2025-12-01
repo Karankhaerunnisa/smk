@@ -276,7 +276,7 @@
     <div class="footer">
         <ol>
             <li>Simpan bukti pendaftaran ini dengan baik.</li>
-            <li>Bukti ini merupakan tanda bahwa pendaftaran Anda telah tercatat dalam sistem PPDB.</li>
+            <li>Bukti ini merupakan tanda bahwa pendaftaran Anda telah tercatat dalam SPMB.</li>
         </ol>
     </div>
 

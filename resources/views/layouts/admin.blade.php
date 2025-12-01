@@ -16,22 +16,33 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased bg-gray-100">
+<body class="font-sans antialiased bg-gray-100" x-data="{ sidebarOpen: false }">
     <div class="flex h-screen overflow-hidden">
 
-        <!-- Sidebar -->
-        <aside class="w-64 bg-gray-900 text-white flex-shrink-0 hidden md:flex flex-col">
-            <div class="p-4 border-b border-gray-800 flex items-center gap-3">
-                <x-heroicon-o-building-library class="w-8 h-8 text-blue-500" />
-                <div>
-                    <h1 class="text-lg font-bold">SPMB Admin</h1>
-                    <p class="text-xs text-gray-400">SMK Rohmatul Ummah</p>
+        <div x-show="sidebarOpen" @click="sidebarOpen = false"
+            x-transition:enter="transition-opacity ease-linear duration-300" x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100" x-transition:leave="transition-opacity ease-linear duration-300"
+            x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+            class="fixed inset-0 bg-gray-900 bg-opacity-50 z-20 md:hidden"></div>
+
+        <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
+            class="fixed inset-y-0 left-0 z-30 w-64 bg-gray-900 text-white transition-transform duration-300 ease-in-out md:translate-x-0 md:static md:inset-0 md:flex md:flex-col transform">
+
+            <div class="p-4 border-b border-gray-800 flex items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                    <x-heroicon-o-building-library class="w-8 h-8 text-blue-500" />
+                    <div>
+                        <h1 class="text-lg font-bold">SPMB Admin</h1>
+                        <p class="text-xs text-gray-400">SMK Rohmatul Ummah</p>
+                    </div>
                 </div>
+                <button @click="sidebarOpen = false" class="md:hidden text-gray-400 hover:text-white">
+                    <x-heroicon-o-x-mark class="w-6 h-6" />
+                </button>
             </div>
 
             <nav class="flex-1 overflow-y-auto py-4">
                 <ul class="space-y-1">
-
                     <li>
                         <a href="{{ route('admin.dashboard') }}"
                             class="flex items-center px-4 py-3 {{ request()->routeIs('admin.dashboard') ? 'bg-blue-600 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white' }}">
@@ -39,7 +50,6 @@
                             Dashboard
                         </a>
                     </li>
-
                     <li>
                         <a href="{{ route('admin.registrants.index') }}"
                             class="flex items-center px-4 py-3 {{ request()->routeIs('admin.registrants.*') ? 'bg-blue-600 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white' }}">
@@ -47,7 +57,6 @@
                             Data Pendaftar
                         </a>
                     </li>
-
                     <li>
                         <a href="{{ route('admin.majors.index') }}"
                             class="flex items-center px-4 py-3 {{ request()->routeIs('admin.majors.*') ? 'bg-blue-600 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white' }}">
@@ -55,7 +64,6 @@
                             Kelola Jurusan
                         </a>
                     </li>
-
                     <li>
                         <a href="{{ route('admin.announcements.index') }}"
                             class="flex items-center px-4 py-3 {{ request()->routeIs('admin.announcements.*') ? 'bg-blue-600 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white' }}">
@@ -63,15 +71,13 @@
                             Pengumuman
                         </a>
                     </li>
-
                     <li>
                         <a href="{{ route('admin.settings.index') }}"
-                            class="flex items-center px-4 py-3 {{ request()->routeIs('admin.settings.*') ? 'bg-blue-600 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white'}}">
+                            class="flex items-center px-4 py-3 {{ request()->routeIs('admin.settings.*') ? 'bg-blue-600 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white' }}">
                             <x-heroicon-o-cog-6-tooth class="w-5 h-5 mr-3" />
                             Pengaturan
                         </a>
                     </li>
-
                     <li>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -86,19 +92,24 @@
             </nav>
         </aside>
 
-        <!-- Main Content Wrapper -->
         <div class="flex-1 flex flex-col overflow-hidden">
-            <!-- Top Header -->
-            <header class="bg-white shadow-sm h-16 flex items-center justify-between px-6">
-                <h2 class="text-xl font-bold text-gray-800">
-                    @yield('title', 'Dashboard')
-                </h2>
+            <header class="bg-white shadow-sm h-16 flex items-center justify-between px-6 relative z-10">
+
+                <div class="flex items-center">
+                    <button @click="sidebarOpen = true" class="text-gray-500 focus:outline-none md:hidden mr-4">
+                        <x-heroicon-o-bars-3 class="w-6 h-6" />
+                    </button>
+
+                    <h2 class="text-xl font-bold text-gray-800">
+                        @yield('title', 'Dashboard')
+                    </h2>
+                </div>
 
                 <div x-data="{ open: false }" class="relative">
                     <button @click="open = !open" @click.outside="open = false"
                         class="flex items-center space-x-3 focus:outline-none">
 
-                        <div class="text-right">
+                        <div class="text-right hidden sm:block">
                             <div class="text-sm font-bold text-gray-800">{{ Auth::user()->name }}</div>
                             <div class="text-xs text-gray-500">{{ Auth::user()->email }}</div>
                         </div>
@@ -141,7 +152,6 @@
                 </div>
             </header>
 
-            <!-- Page Content -->
             <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
                 @yield('content')
             </main>
