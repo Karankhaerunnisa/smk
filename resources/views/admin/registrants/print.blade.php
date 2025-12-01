@@ -32,7 +32,7 @@
         /* CONTENT */
         .title {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 0px;
             font-weight: bold;
             text-decoration: underline;
         }
@@ -51,7 +51,7 @@
 
         .data-table td {
             vertical-align: top;
-            padding: 4px;
+            padding: 3px;
         }
 
         .label {
@@ -63,14 +63,13 @@
         }
 
         .value {
-            width: 63%;
-            font-weight: bold;
+            width: 43%;
         }
 
         /* SIGNATURES */
         .signature-section {
             width: 100%;
-            margin-top: 50px;
+            margin-top: 10px;
         }
 
         .signature-table {
@@ -85,19 +84,36 @@
 
         /* NOTES */
         .notes {
-            border: 1px solid black;
-            padding: 10px;
-            margin-top: 20px;
-            font-size: 10pt;
+            padding: 8px;
         }
 
-        .notes h3 {
-            margin-top: 0;
-            font-size: 11pt;
+        .pending {
+            border: 1px transparent;
+            background-color: #FEF9C3;
+            color: #b7791f;
+        }
+
+        .verified {
+            border: 1px transparent;
+            background-color: #DBEAFE;
+            color: #1A56DB;
+        }
+
+        .accepted {
+            border: 1px transparent;
+            background-color: #DCFCE7;
+            color: #2f855a;
+        }
+
+        .rejected {
+            border: 1px transparent;
+            background-color: #fff5f5;
+            color: #c53030;
         }
 
         /* UTILS */
         .uppercase {
+            font-weight: bold;
             text-transform: uppercase;
         }
 
@@ -136,6 +152,11 @@
             border-bottom: 2px double black;
             margin-bottom: 20px;
         }
+
+        .footer {
+            font-size: 10pt;
+            margin-top: 10px;
+        }
     </style>
 </head>
 
@@ -170,7 +191,7 @@
         <tr>
             <td class="label">Nomor Pendaftaran</td>
             <td class="separator">:</td>
-            <td class="value">{{ $registrant->registration_number }}</td>
+            <td class="value uppercase">{{ $registrant->registration_number }}</td>
         </tr>
         <tr>
             <td class="label">Nama Lengkap</td>
@@ -185,7 +206,7 @@
         <tr>
             <td class="label">Tempat, Tanggal Lahir</td>
             <td class="separator">:</td>
-            <td class="value uppercase">{{ $registrant->birth_place }}, {{ $registrant->birth_date
+            <td class="value">{{ $registrant->birth_place }}, {{ $registrant->birth_date
                 ->translatedFormat('d F Y') }}</td>
         </tr>
         <tr>
@@ -211,12 +232,12 @@
         <tr>
             <td class="label">Asal Sekolah</td>
             <td class="separator">:</td>
-            <td class="value uppercase">{{ $registrant->academic->school_name ?? '-' }}</td>
+            <td class="value">{{ $registrant->academic->school_name ?? '-' }}</td>
         </tr>
         <tr>
             <td class="label">Jurusan yang Dipilih</td>
             <td class="separator">:</td>
-            <td class="value uppercase">{{ $registrant->major->name }}</td>
+            <td class="value">{{ $registrant->major->name }}</td>
         </tr>
         <tr>
             <td class="label">Tanggal Pendaftaran</td>
@@ -226,7 +247,7 @@
         <tr>
             <td class="label">Status Pendaftaran</td>
             <td class="separator">:</td>
-            <td class="value uppercase">{{ $registrant->status->label() }}</td>
+            <td class="value uppercase"><span class="notes {{ $registrant->status->value }}">{{ $registrant->status->label() }}</span></td>
         </tr>
     </table>
 
@@ -245,19 +266,17 @@
                     Kudus, {{ now()->translatedFormat('d F Y') }}<br>
                     Ketua Panitia SPMB,
                     <br><br><br><br>
-                    <b>Drs. H. Ahmad Fauzi, M.Pd</b><br>
-                    NIP. 196512301990031005
+                    <b>{{ \App\Models\Setting::getValue('committee_head_name') }}</b><br>
+                    NIP. {{ \App\Models\Setting::getValue('committee_head_nip') }}
                 </td>
             </tr>
         </table>
     </div>
 
-    <div class="notes">
-        <h3>Catatan Penting:</h3>
+    <div class="footer">
         <ol>
             <li>Simpan bukti pendaftaran ini dengan baik.</li>
             <li>Bukti ini merupakan tanda bahwa pendaftaran Anda telah tercatat dalam sistem PPDB.</li>
-            <li>Cek status pendaftaran secara berkala melalui website sekolah.</li>
         </ol>
     </div>
 

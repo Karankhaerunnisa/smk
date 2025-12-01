@@ -134,8 +134,39 @@
                 </div>
 
             </div>
-        </div>
 
+            <h3 class="text-lg font-bold text-gray-800  mt-5 mb-4 flex items-center border-b pb-2">
+                <x-heroicon-o-users class="w-5 h-5 mr-2 text-blue-600" />
+                Data Panitia
+            </h3>
+
+            <div class="space-y-4">
+
+                <div class="bg-blue-50 border border-blue-100 rounded-md p-3 mb-4">
+                    <p class="text-xs text-blue-700">
+                        <x-heroicon-o-information-circle class="w-4 h-4 inline mr-1" />
+                        Data ini akan ditampilkan pada kolom tanda tangan di <b>Cetak Bukti Pendaftaran</b>.
+                    </p>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Nama Ketua Panitia</label>
+                    <input type="text" name="committee_head_name"
+                        value="{{ old('committee_head_name', $settings['committee_head_name'] ?? '') }}"
+                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm"
+                        placeholder="Contoh: Drs. H. Ahmad Fauzi, M.Pd">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">NIP Ketua Panitia</label>
+                    <input type="text" name="committee_head_nip"
+                        value="{{ old('committee_head_nip', $settings['committee_head_nip'] ?? '') }}"
+                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm"
+                        placeholder="Contoh: 19800101 200501 1 001">
+                </div>
+
+            </div>
+        </div>
     </div>
 
     <div class="mt-6 flex justify-end">

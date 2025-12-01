@@ -43,6 +43,10 @@ class UpdateSettingRequest extends FormRequest
             // Logo validation (Optional, max 2MB)
             'app_logo' => ['nullable', 'image', 'max:2048'],
             'document_header' => ['nullable', 'image', 'max:2048'],
+
+            // Committee Info
+            'committee_head_name' => ['required', 'string', 'max:100'],
+            'committee_head_nip' => ['nullable', 'string', 'max:30'],
         ];
     }
 }

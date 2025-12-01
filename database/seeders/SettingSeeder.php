@@ -16,39 +16,39 @@ class SettingSeeder extends Seeder
         $settings = [
             [
                 'key' => 'school_name',
-                'value' => 'SMK Negeri 1 Digital',
+                'value' => 'SMK Rohmatul Ummah',
                 'type' => 'string'
             ],
             [
                 'key' => 'school_address',
-                'value' => 'Jl. Teknologi No. 404, Cyber City',
+                'value' => 'Baladil Amin, Pulutan, 005/003, Jekulo Kudus',
                 'type' => 'string'
             ],
             [
                 'key' => 'school_phone',
-                'value' => '(021) 555-0199',
+                'value' => '+62 877-5418-9830',
                 'type' => 'string'
             ],
             [
                 'key' => 'school_email',
-                'value' => 'info@smk1digital.sch.id',
+                'value' => 'smkrohum@gmail.com ',
                 'type' => 'string'
             ],
 
             // Registration Config
             [
                 'key' => 'academic_year',
-                'value' => '2025/2026',
+                'value' => '2026/2027',
                 'type' => 'string'
             ],
             [
                 'key' => 'registration_start_date',
-                'value' => '2025-06-01',
+                'value' => '2026-01-01',
                 'type' => 'date'
             ],
             [
                 'key' => 'registration_end_date',
-                'value' => '2025-07-15',
+                'value' => '2026-08-15',
                 'type' => 'date'
             ],
             [
@@ -67,6 +67,18 @@ class SettingSeeder extends Seeder
             [
                 'key' => 'document_header',
                 'value' => 'letter-head.png',
+                'type' => 'string'
+            ],
+
+            // Committee Info
+            [
+                'key' => 'committee_head_name',
+                'value' => 'Aufa Shihabudin Ridho',
+                'type' => 'string'
+            ],
+            [
+                'key' => 'committee_head_nip',
+                'value' => '',
                 'type' => 'string'
             ],
         ];

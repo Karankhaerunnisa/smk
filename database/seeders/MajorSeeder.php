@@ -15,28 +15,10 @@ class MajorSeeder extends Seeder
     {
         $majors = [
             [
-                'code' => 'TKJ',
-                'name' => 'Teknik Komputer dan Jaringan',
-                'quota' => 36,
-                'description' => 'Program keahlian yang mempelajari tentang cara instalasi PC, instalasi LAN, memperbaiki PC, dan mempelajari program software.',
-            ],
-            [
-                'code' => 'RPL',
-                'name' => 'Rekayasa Perangkat Lunak',
-                'quota' => 36,
-                'description' => 'Program keahlian yang mempelajari dan mendalami semua cara-cara pengembangan perangkat lunak termasuk pembuatan, pemeliharaan, manajemen organisasi pengembangan perangkat lunak dan manajemen kualitas.',
-            ],
-            [
-                'code' => 'OTKP',
-                'name' => 'Otomasi dan Tata Kelola Perkantoran',
-                'quota' => 36,
-                'description' => 'Program keahlian yang mempelajari tentang pengelolaan dan penanganan administrasi kantor dan kesekretarisan.',
-            ],
-            [
-                'code' => 'AKL',
-                'name' => 'Akuntansi dan Keuangan Lembaga',
-                'quota' => 36,
-                'description' => 'Program keahlian yang mempelajari tentang pengelolaan keuangan, pencatatan transaksi, dan pelaporan keuangan.',
+                'code' => 'DKV',
+                'name' => 'Desain Komunikasi Visual',
+                'quota' => 50,
+                'description' => 'Jurusan DKV (Desain Komunikasi Visual) mempelajari cara menyampaikan pesan melalui elemen visual seperti gambar, warna, dan teks untuk menciptakan karya yang efektif dan menarik.',
             ],
         ];
 
