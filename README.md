@@ -101,3 +101,5 @@ php artisan storage:link
 # 6) Install JS deps
 
 npm install
+
+# check commit
