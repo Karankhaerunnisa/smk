@@ -1,9 +1,12 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # Jangan redirect file & folder yang benar-benar ada
+    # Arahkan asset ke folder public
+    RewriteCond %{REQUEST_URI} ^/(build|images|css|js|fonts|storage)/
+    RewriteRule ^(.*)$ public/$1 [L]
+
+    # Laravel front controller
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-
     RewriteRule ^ index.php [L]
 </IfModule>
