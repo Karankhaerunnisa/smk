@@ -431,7 +431,7 @@
                     @endphp
                     @if($ttdKepsek)
                     <div style="height: 70px; text-align: center;">
-                        <img src="{{ public_path('images/' . $ttdKepsek) }}" style="max-width: 100px; max-height: 60px;" alt="TTD Kepsek">
+                        <img src="{{ public_path('images/' . $ttdKepsek) }}" style="max-width: 300px; max-height: 60px;" alt="TTD Kepsek">
                     </div>
                     @else
                     <br><br><br><br>
