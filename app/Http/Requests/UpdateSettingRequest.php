@@ -34,6 +34,8 @@ class UpdateSettingRequest extends FormRequest
             'school_address' => ['required', 'string'],
             'school_phone' => ['required', 'string'],
             'school_email' => ['required', 'email'],
+            'school_whatsapp' => ['nullable', 'string', 'max:20'],
+            'linktree_url' => ['nullable', 'url', 'max:255'],
 
             'academic_year' => ['required', 'string'],
             'registration_start_date' => ['required', 'date'],
@@ -44,9 +46,21 @@ class UpdateSettingRequest extends FormRequest
             'app_logo' => ['nullable', 'image', 'max:2048'],
             'document_header' => ['nullable', 'image', 'max:2048'],
 
+            // Exam Links
+            'exam_link_1' => ['nullable', 'url', 'max:500'],
+            'exam_link_2' => ['nullable', 'url', 'max:500'],
+
             // Committee Info
             'committee_head_name' => ['required', 'string', 'max:100'],
             'committee_head_nip' => ['nullable', 'string', 'max:30'],
+
+            // Principal Info
+            'principal_name' => ['nullable', 'string', 'max:100'],
+            'principal_nip' => ['nullable', 'string', 'max:30'],
+
+            // TTD Digital
+            'ttd_panitia' => ['nullable', 'image', 'max:2048'],
+            'ttd_kepala_sekolah' => ['nullable', 'image', 'max:2048'],
         ];
     }
 }
