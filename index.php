@@ -5,9 +5,9 @@ use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
 
-require _DIR_.'/vendor/autoload.php';
+require __DIR__.'/vendor/autoload.php';
 
-$app = require_once _DIR_.'/bootstrap/app.php';
+$app = require_once __DIR__.'/bootstrap/app.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +15,7 @@ $app = require_once _DIR_.'/bootstrap/app.php';
 |--------------------------------------------------------------------------
 */
 $app->bind('path.public', function () {
-    return _DIR_.'/public';
+    return __DIR__.'/public';
 });
 
 $kernel = $app->make(Kernel::class);
